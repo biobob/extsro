@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="sk">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=1000; user-scalable=0;">
+    <title>exT Nákladná Doprava</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Róbert Komorovský">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/960.css">
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
+    <script>
+      $(function() {
+        var request;
+        $("#form").submit(function(event) {
+          if (request) {
+            request.abort();
+          }
+          var $form = $(this);
+          var $inputs = $form.find("input, select, button, textarea");
+          var serializedData = $form.serialize();
+          $inputs.prop("disabled", true);
+          request = $.ajax({
+            url: "mail.php",
+            type: "post",
+            data: serializedData
+          });
+          request.done(function(response, textStatus, jqXHR) {
+            $("#form > *").removeClass("error");
+            $xml = $(response);
+            $xml.find("error").each(function() {
+              $("#form > *[name='" + $(this).attr("field") + "']").addClass("error");
+            });
+            if ($xml.find("success").length) {
+              alert("Vaša správa bola úspešne odoslaná. Ozveme sa Vám čo najskôr.");
+            }
+            if ($xml.find("failure").length) {
+              alert("Správu sa nepodarilo odoslať. Skúste prosím akciu zopakovať.");  
+            }
+          });
+          request.fail(function(jqXHR, textStatus, errorThrown) {
+            alert("Pri spracovávaní formulára došlo k chybe. Skúste prosím akciu zopakovať.");
+          });
+          request.always(function() {
+            $inputs.prop("disabled", false);
+          });
+          event.preventDefault();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="container_12">
+        <a href="index.html" id="logo" class="grid_2">
+          <img src="img/logo.png" alt="exT s.r.o."><span>Expres transport</span>
+        </a>
+        <div class="grid_10">
+          <div class="grid_1 prefix_9 alpha omega">
+            <a href="https://www.facebook.com/extsro.eu" target="_blank" class="icon" title="Facebook">&#xf082;</a>
+          </div>
+          <div class="grid_8 prefix_2 alpha omega">
+            <a href="kontakt.html" class="menu active">Kontakt<br><span>kde nás nájdete</span></a>
+            <a href="firmy.html" class="menu">Firmy<br><span>ktoré odporúčame</span></a>
+            <a href="kariera.html" class="menu">Kariéra<br><span>pracovné pozície</span></a>
+            <a href="ponuka.html" class="menu">Niečo o nás<br><span>čo ponúkame</span></a>
+          </div>
+          <div class="clear"> </div>
+        </div>
+        <div class="clear"> </div>
+      </div>
+    </header>
+    <section>
+      <div class="container_12">
+        <div class="grid_6 box">
+          <span class="icon">&#xf095;</span>
+          <h1>Telefonický kontakt</h1>
+          <table>
+            <tr>
+              <td>Dispečing (non-stop):&nbsp;&nbsp;&nbsp;<br>Špedícia:</td>
+              <td><b>+421&nbsp;904&nbsp;162&nbsp;512</b></td>
+            </tr>
+            <tr>
+              <td><br>Disponent:<br>Ľubor Ruttkay</td>
+              <td><br><b>+421&nbsp;901&nbsp;910&nbsp;512</b></td>
+            </tr>
+            <tr>
+            <td><br>Konateľ spoločnosti:<br>Marcel Šubík</td>
+              <td><br><b>+421&nbsp;904&nbsp;412&nbsp;512</b></td>
+            </tr>
+          </table>
+        </div>
+        <div class="grid_6 box">
+          <span class="icon">&#xf0e0;</span>
+          <h1>Adresa</h1>
+          <p>
+            exT s.r.o.<br>
+            Rosinská 8541/30A<br>
+            010 08 Žilina
+          </p>
+          <table>
+            <tr>
+              <td>Mailová adresa:</td>
+              <td><b><a href="mailto:mail@extsro.eu" style="text-decoration:none;color:black;">mail@extsro.eu</a></b></td>
+            </tr>
+            <tr>
+              <td style="padding-top:15px;">Disponent:</td>
+              <td style="padding-top:15px;"><b><a href="mailto:l.ruttkay@extsro.eu" style="text-decoration:none;color:black;">l.ruttkay@extsro.eu</a></b></td>
+            </tr>
+            <tr>
+              <td>Konateľ spoločnosti:</td>
+              <td><b><a href="mailto:m.subik@extsro.eu" style="text-decoration:none;color:black;">m.subik@extsro.eu</a></b></td>
+            </tr>
+            <tr>
+              <td valign="top"><br>Ekonomické oddelenie:&nbsp;&nbsp;&nbsp;</td>
+              <td>
+                <div><br><b><a href="mailto:m.kobolkova@extsro.eu" style="text-decoration:none;color:black;">m.kobolkova@extsro.eu</a></b><br>Financie a fakturácie</div>
+                <div style="margin-top:3px;"><b><a href="mailto:s.antosova@extsro.eu" style="text-decoration:none;color:black;">s.antosova@extsro.eu</a></b><br>Personalistika<br></div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="clear"> </div>
+        <div class="grid_7 box">
+          <span class="icon">&#xf075;</span>
+          <h1>Kontaktný formulár</h1>
+          <form id="form">
+            <label>Vaše meno:</label><span class="inline-icon info" title="Zvoľte si preferované oslovenie v ďalšej komunikácii.">&#xf05a;</span><input type="text" name="name" value="" placeholder="Ján Kováč"><br>
+            <label>Váš mail / tel. číslo:</label><span class="inline-icon info" title="Spätný kontakt. Ozveme sa Vám čo najskôr.">&#xf05a;</span><input type="text" name="email" value="" placeholder="jano.kovac@zoznam.sk"><br>
+            <label>Otázka na nás:</label><br>
+            <textarea name="content" rows="10" placeholder="Dobrý deň, chcem sa opýtať..."></textarea><br>
+            <button type="submit" name="submit" value="submit">Odoslať</button>
+          </form>
+        </div>
+        <div class="grid_5 box">
+          <iframe width="320" height="240" frameborder="0" style="border:1px solid #111;margin:80px 0 0 40px;" src="https://www.google.com/maps/embed/v1/place?key= AIzaSyCaQ54QgSU6nnsfzaSsKwQOZ79qPpdJWY4&q=Rosinska+8541/30,Zilina" allowfullscreen></iframe>
+        </div>
+        <div class="clear"> </div>
+        <footer class="grid_12">
+          &copy;&nbsp;<script>document.write(new Date().getFullYear())</script>&nbsp;exT&nbsp;spol.&nbsp;s&nbsp;r.&nbsp;o.
+        </footer>
+        <div class="clear"> </div>
+      </div>
+    </section>
+  </body>
+</html>
