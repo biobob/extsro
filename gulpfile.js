@@ -32,7 +32,7 @@ gulp.task('deploy', function() {
         host:     process.env.FTP_HOST,
         user:     process.env.FTP_USER,
         password: process.env.FTP_PASS,
-        log:      log.log
+        log:      log
       });
   conn.clean([process.env.FTP_PATH + '/**'], conf.paths.dist, {base: '/'});
 
