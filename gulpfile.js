@@ -17,7 +17,7 @@ const gulp  = require('gulp'),
     };
 
 // default task
-gulp.task('default', series(['html', 'deploy']));
+gulp.task('default', gulp.series(['html', 'deploy']));
 
 // process HTML files
 gulp.task('html', () => {
