@@ -1,0 +1,11 @@
+{
+  "name": "eu-extsro-site",
+  "version": "0.1.0",
+  "description": "exT s.r.o. website",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/biobob/extsro.git"
+  },
+  "author": "Róbert Komorovský",
+  "license": "MIT"
+}
