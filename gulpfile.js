@@ -34,6 +34,6 @@ gulp.task('deploy', function() {
         password: process.env.FTP_PASS,
         log:      gutil.log
       });
-  gulp.src([conf.paths.dist + '/**'], {base: '.', buffer: false})
+  gulp.src([conf.paths.dist + '/**'], {base: conf.paths.dist, buffer: false})
       .pipe(conn.dest(process.env.FTP_PATH));
 });
