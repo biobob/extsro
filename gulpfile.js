@@ -1,9 +1,7 @@
-// grab gulp packages
 var gulp  = require('gulp'),
     log = require('fancy-log'),
     ftp = require('vinyl-ftp'),
     
-// configuration
     conf = {
       paths: {
         src: {
@@ -17,17 +15,17 @@ var gulp  = require('gulp'),
       }
     };
 
-// create a default task
+// default task
 gulp.task('default', ['html', 'deploy']);
 
 // process HTML files
-gulp.task('html', function() {
+gulp.task('html', () => {
   gulp.src(conf.paths.src.htm)
       .pipe(gulp.dest(conf.paths.dist));
 });
 
 // deploy via FTP
-gulp.task('deploy', function() {
+gulp.task('deploy', () => {
   var conn = ftp.create({
         host:        process.env.FTP_HOST,
         user:        process.env.FTP_USER,
