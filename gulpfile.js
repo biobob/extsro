@@ -39,6 +39,6 @@ gulp.task('deploy', () => {
   //conn.clean([process.env.FTP_PATH + '/**'], conf.paths.dist, {base: '/'});
 
   gulp.src([conf.paths.dist + '/**'], {base: conf.paths.dist, buffer: false})
-      .pipe(debug(title: 'ftp:'))
+      .pipe(debug({title: 'ftp:'}))
       .pipe(conn.dest(process.env.FTP_PATH));
 });
