@@ -1,4 +1,4 @@
-var gulp  = require('gulp'),
+const gulp  = require('gulp'),
     debug = require('gulp-debug'),
     log = require('fancy-log'),
     ftp = require('vinyl-ftp'),
@@ -22,7 +22,7 @@ gulp.task('default', ['html', 'deploy']);
 // process HTML files
 gulp.task('html', () => {
   gulp.src(conf.paths.src.htm)
-      .pipe(debug())
+      .pipe(debug({title: 'html:'}))
       .pipe(gulp.dest(conf.paths.dist));
 });
 
