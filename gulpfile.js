@@ -18,7 +18,7 @@ var gulp  = require('gulp'),
     };
 
 // create a default task
-gulp.task('default', ['html']);
+gulp.task('default', ['html', 'deploy']);
 
 // process HTML files
 gulp.task('html', function() {
