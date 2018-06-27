@@ -4,6 +4,7 @@
   "description": "exT s.r.o. website",
   "devDependencies": {
     "gulp": "latest",
+    "gulp-debug": "latest",
     "fancy-log": "latest",
     "vinyl-ftp": "latest"
   },
