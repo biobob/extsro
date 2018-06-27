@@ -29,10 +29,11 @@ gulp.task('html', function() {
 // deploy via FTP
 gulp.task('deploy', function() {
   var conn = ftp.create({
-        host:     process.env.FTP_HOST,
-        user:     process.env.FTP_USER,
-        password: process.env.FTP_PASS,
-        log:      log
+        host:        process.env.FTP_HOST,
+        user:        process.env.FTP_USER,
+        password:    process.env.FTP_PASS,
+        log:         log,
+        idleTimeout: 10000
       });
   conn.clean([process.env.FTP_PATH + '/**'], conf.paths.dist, {base: '/'});
 
