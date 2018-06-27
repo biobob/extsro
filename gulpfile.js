@@ -17,10 +17,10 @@ const gulp  = require('gulp'),
     };
 
 // default task
-gulp.task('default', ['html', 'deploy']);
+gulp.task('default', series(['html', 'deploy']));
 
 // process HTML files
-gulp.task('html', ['deploy'], () => {
+gulp.task('html', () => {
   gulp.src(conf.paths.src.htm)
       .pipe(debug({title: 'html:'}))
       .pipe(gulp.dest(conf.paths.dist));
