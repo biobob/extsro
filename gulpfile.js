@@ -20,14 +20,14 @@ const gulp  = require('gulp'),
 gulp.task('default', ['html', 'deploy']);
 
 // process HTML files
-gulp.task('html', () => {
+gulp.task('html', ['deploy'], () => {
   gulp.src(conf.paths.src.htm)
       .pipe(debug({title: 'html:'}))
       .pipe(gulp.dest(conf.paths.dist));
 });
 
 // deploy via FTP
-gulp.task('deploy', ['html'], () => {
+gulp.task('deploy', () => {
   var conn = ftp.create({
         host:        process.env.FTP_HOST,
         user:        process.env.FTP_USER,
