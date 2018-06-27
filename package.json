@@ -4,7 +4,8 @@
   "description": "exT s.r.o. website",
   "devDependencies": {
     "gulp": "latest",
-    "gulp-util": "latest"
+    "gulp-util": "latest",
+    "vinyl-ftp": "latest"
   },
   "repository": {
     "type": "git",
