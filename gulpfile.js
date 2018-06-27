@@ -1,6 +1,7 @@
 // grab gulp packages
 var gulp  = require('gulp'),
     gutil = require('gulp-util'),
+    ftp = require('vinyl-ftp'),
     
 // configuration
     conf = {
@@ -23,4 +24,16 @@ gulp.task('default', ['html']);
 gulp.task('html', function() {
   gulp.src(conf.paths.src.htm)
       .pipe(gulp.dest(conf.paths.dist));
+});
+
+// deploy via FTP
+gulp.task('deploy', function() {
+  var conn = ftp.create({
+        host:     process.env.FTP_HOST,
+        user:     process.env.FTP_USER,
+        password: process.env.FTP_PASS,
+        log:      gutil.log
+      });
+  gulp.src([conf.paths.dist + '/**'], {base: '.', buffer: false})
+      .pipe(conn.dest(process.env.FTP_PATH));
 });
