@@ -5,7 +5,7 @@
   "devDependencies": {
     "gulp": "latest",
     "gulp-util": "latest"
-  }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/biobob/extsro.git"
