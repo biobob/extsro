@@ -27,7 +27,7 @@ gulp.task('html', () => {
 });
 
 // deploy via FTP
-gulp.task('deploy', () => {
+gulp.task('deploy', ['html'], () => {
   var conn = ftp.create({
         host:        process.env.FTP_HOST,
         user:        process.env.FTP_USER,
