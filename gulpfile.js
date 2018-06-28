@@ -13,6 +13,15 @@ const gulp = require('gulp'),
                   res: './src/res/*.*'
               },
               dist: './dist'
+          },
+          ftp: {
+              connection: ftp.create({
+                  host:        process.env.FTP_HOST,
+                  user:        process.env.FTP_USER,
+                  password:    process.env.FTP_PASS,
+                  log:         log,
+                  idleTimeout: 10000
+              })
           }
       },
       
@@ -22,16 +31,16 @@ const gulp = require('gulp'),
           .pipe(gulp.dest(conf.paths.dist));
 
 const deploy = () => {
-    const conn = ftp.create({
-        host:        process.env.FTP_HOST,
-        user:        process.env.FTP_USER,
-        password:    process.env.FTP_PASS,
-        log:         log,
-        idleTimeout: 10000
-    });
+    //const conn = ftp.create({
+    //    host:        process.env.FTP_HOST,
+    //    user:        process.env.FTP_USER,
+    //    password:    process.env.FTP_PASS,
+    //    log:         log,
+    //    idleTimeout: 10000
+    //});
     return gulp.src([conf.paths.dist + '/**'], {base: conf.paths.dist, buffer: false})
         .pipe(debug({title: 'ftp:'}))
-        .pipe(conn.dest(process.env.FTP_PATH));
+        .pipe(conf.ftp.connection.dest(process.env.FTP_PATH));
 }
 
 // default task (called from CLI when executing `gulp`)
