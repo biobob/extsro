@@ -37,27 +37,3 @@ const deploy = () => {
 
 // default task (called from CLI when executing `gulp`)
 gulp.task('default', gulp.series(html, deploy));
-
-// process HTML files
-//gulp.task('html', () => {
-//  gulp.src(conf.paths.src.htm)
-//      .pipe(debug({title: 'html:'}))
-//      .pipe(gulp.dest(conf.paths.dist));
-//});
-//
-// deploy via FTP
-//gulp.task('deploy', () => {
-//  var conn = ftp.create({
-//        host:        process.env.FTP_HOST,
-//        user:        process.env.FTP_USER,
-//        password:    process.env.FTP_PASS,
-//        log:         log,
-//        idleTimeout: 10000
-//      });
-//    
-//  //conn.clean([process.env.FTP_PATH + '/**'], conf.paths.dist, {base: '/'});
-//
-//  gulp.src([conf.paths.dist + '/**'], {base: conf.paths.dist, buffer: false})
-//      .pipe(debug({title: 'ftp:'}))
-//      .pipe(conn.dest(process.env.FTP_PATH));
-//});
