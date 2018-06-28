@@ -3,9 +3,6 @@
   "version": "0.1.0",
   "description": "exT s.r.o. website",
   "devDependencies": {
-    "babel": "^6.23.0",
-    "babel-core": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
     "gulp": "latest",
     "gulp-debug": "^4.0.0",
     "fancy-log": "latest",
