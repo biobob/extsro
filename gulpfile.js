@@ -27,13 +27,18 @@ const gulp = require('gulp'),
       
       html = () => gulp
           .src(conf.paths.src.htm)
-          .pipe(debug({title: 'html:'}))
+          .pipe(debug({title: 'Debug html:'}))
+          .pipe(gulp.dest(conf.paths.dist)),
+      
+      php = () => gulp
+          .src(conf.paths.src.php)
+          .pipe(debug({title: 'Debug php:'}))
           .pipe(gulp.dest(conf.paths.dist)),
       
       deploy = () => gulp
         .src([conf.paths.dist + '/**'], {base: conf.paths.dist, buffer: false})
-        .pipe(debug({title: 'ftp:'}))
+        .pipe(debug({title: 'Debug ftp:'}))
         .pipe(conf.ftp.connection.dest(process.env.FTP_PATH));
 
 // default task (called from CLI when executing `gulp`)
-gulp.task('default', gulp.series(html, deploy));
+gulp.task('default', gulp.series(gulp.parallel(html, php), deploy));
