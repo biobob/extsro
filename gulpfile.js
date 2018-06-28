@@ -37,7 +37,7 @@ const gulp = require('gulp'),
           .pipe(gulp.dest(conf.paths.dist)),
       
       copy = () => gulp
-          .src([conf.paths.src.img, conf.paths.src.res], {base: conf.paths.src.dir})
+          .src([conf.paths.src.css, conf.paths.src.img, conf.paths.src.res], {base: conf.paths.src.dir})
           .pipe(debug({title: 'Debug copy:'}))
           .pipe(gulp.dest(conf.paths.dist)),
       
