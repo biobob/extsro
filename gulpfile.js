@@ -1,7 +1,7 @@
-import gulp from 'gulp';
-import debug from 'gulp-debug';
-import log from 'fancy-log';
-import ftp from 'vinyl-ftp';
+const gulp = require('gulp');
+const debug = require('gulp-debug');
+const log = require('fancy-log');
+const ftp = require('vinyl-ftp');
     
 const conf = {
     paths: {
