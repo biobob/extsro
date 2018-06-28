@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "description": "exT s.r.o. website",
   "devDependencies": {
-    "gulp": "latest",
-    "gulp-debug": "^4.0.0",
+    "gulp": "^4.0.0",
+    "gulp-debug": "latest",
     "fancy-log": "latest",
     "vinyl-ftp": "latest"
   },
