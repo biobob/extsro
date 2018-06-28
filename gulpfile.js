@@ -14,13 +14,12 @@ const gulp = require('gulp'),
               },
               dist: './dist'
           }
-      };
-
-const html = () => {
-    return gulp.src(conf.paths.src.htm)
-      .pipe(debug({title: 'html:'}))
-      .pipe(gulp.dest(conf.paths.dist));
-}
+      },
+      
+      html = () => gulp
+          .src(conf.paths.src.htm)
+          .pipe(debug({title: 'html:'}))
+          .pipe(gulp.dest(conf.paths.dist));
 
 const deploy = () => {
     const conn = ftp.create({
