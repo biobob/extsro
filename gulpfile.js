@@ -1,20 +1,20 @@
-const gulp = require('gulp');
-const debug = require('gulp-debug');
-const log = require('fancy-log');
-const ftp = require('vinyl-ftp');
-    
-const conf = {
-    paths: {
-        src: {
-            htm: './src/html/*.html',
-            css: './src/css/*.css',
-            php: './src/php/*.php',
-            img: './src/img/*.*',
-            res: './src/res/*.*'
-        },
-        dist: './dist'
-    }
-};
+const gulp = require('gulp'),
+      debug = require('gulp-debug'),
+      log = require('fancy-log'),
+      ftp = require('vinyl-ftp'),
+      
+      conf = {
+          paths: {
+              src: {
+                  htm: './src/html/*.html',
+                  css: './src/css/*.css',
+                  php: './src/php/*.php',
+                  img: './src/img/*.*',
+                  res: './src/res/*.*'
+              },
+              dist: './dist'
+          }
+      };
 
 const html = () => {
     return gulp.src(conf.paths.src.htm)
