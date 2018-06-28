@@ -6,6 +6,7 @@ const gulp = require('gulp'),
       conf = {
           paths: {
               src: {
+                  dir: './src',
                   htm: './src/html/*.html',
                   css: './src/css/*.css',
                   php: './src/php/*.php',
@@ -35,10 +36,15 @@ const gulp = require('gulp'),
           .pipe(debug({title: 'Debug php:'}))
           .pipe(gulp.dest(conf.paths.dist)),
       
+      copy = () => gulp
+          .src([conf.paths.src.img, conf.paths.src.res], {base: conf.paths.src.dir})
+          .pipe(debug({title: 'Debug copy:'}))
+          .pipe(gulp.dest(conf.paths.dist)),
+      
       deploy = () => gulp
         .src([conf.paths.dist + '/**'], {base: conf.paths.dist, buffer: false})
         .pipe(debug({title: 'Debug ftp:'}))
         .pipe(conf.ftp.connection.dest(process.env.FTP_PATH));
 
 // default task (called from CLI when executing `gulp`)
-gulp.task('default', gulp.series(gulp.parallel(html, php), deploy));
+gulp.task('default', gulp.series(gulp.parallel(html, php, copy), deploy));
