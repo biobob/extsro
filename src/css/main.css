@@ -135,6 +135,18 @@ header .icon {
   margin-left: 4px;
   height: 28px;
 }
+header .icon:not(.tint) {
+  position: relative;
+}
+header .icon:not(.tint)::after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  border: 3px solid red;
+  border-radius: 3px;
+  left: 9px;
+  top: 28px;
+}
 .tint {
   position: relative;
   display: inline-block;
