@@ -44,7 +44,11 @@ const gulp = require('gulp'),
       deploy = () => gulp
         .src([conf.paths.dist + '/**'], {base: conf.paths.dist, buffer: false})
         .pipe(debug({title: 'Debug ftp:'}))
-        .pipe(conf.ftp.connection.dest(process.env.FTP_STAGING_PATH + '/' + process.env.TRAVIS_BRANCH));
+        .pipe(conf.ftp.connection.dest(
+            process.env.TRAVIS_BRANCH == 'master' ?
+            process.env.FTP_PRODUCTION_PATH :
+            process.env.FTP_STAGING_PATH + '/' + process.env.TRAVIS_BRANCH
+        ));
 
 // default task (called from CLI when executing `gulp`)
 gulp.task('default', gulp.series(gulp.parallel(html, php, copy), deploy));
