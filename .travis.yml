@@ -1,6 +1,4 @@
 language: node_js
-node_js:
-  - "node"
-install:
-  - yarn
+node_js: "node"
+install: yarn
 script: gulp
