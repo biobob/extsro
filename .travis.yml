@@ -3,6 +3,4 @@ node_js:
   - "node"
 install:
   - yarn
-script:
-  - gulp -v
-  - gulp
+script: gulp
