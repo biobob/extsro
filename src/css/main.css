@@ -116,9 +116,6 @@ a.menu:hover span {
 a.active:hover {
   background-color: rgba(17, 17, 17, 1) !important;
 }
-/*header .icon:hover {
-  color: rgba(17, 17, 17, 0.5);
-}*/
 header .icon {
   font-family: 'FontAwesome';
   font-size: 28px;
@@ -136,6 +133,7 @@ header .icon {
   outline: 0;
   margin-right: 0;
   margin-left: 4px;
+  height: 28px;
 }
 .tint {
   position: relative;
