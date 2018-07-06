@@ -9,6 +9,46 @@
     <meta name="author" content="Róbert Komorovský">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/960.css">
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
+    <script>
+      $(function() {
+        var request;
+        $("#form").submit(function(event) {
+          if (request) {
+            request.abort();
+          }
+          var $form = $(this);
+          var $inputs = $form.find("input, select, button, textarea");
+          var serializedData = $form.serialize();
+          $inputs.prop("disabled", true);
+          request = $.ajax({
+            url: "mail.php",
+            type: "post",
+            data: serializedData
+          });
+          request.done(function(response, textStatus, jqXHR) {
+            $("#form > *").removeClass("error");
+            $xml = $(response);
+            $xml.find("error").each(function() {
+              $("#form > *[name='" + $(this).attr("field") + "']").addClass("error");
+            });
+            if ($xml.find("success").length) {
+              alert("Your message was successfully sent. We will contact you ASAP.");
+            }
+            if ($xml.find("failure").length) {
+              alert("Failed to send your message. Please try to perform the action again.");  
+            }
+          });
+          request.fail(function(jqXHR, textStatus, errorThrown) {
+            alert("Processing of the form failed. Please try to perform the action again.");
+          });
+          request.always(function() {
+            $inputs.prop("disabled", false);
+          });
+          event.preventDefault();
+        });
+      });
+    </script>
   </head>
   <body>
     <header>
@@ -77,7 +117,70 @@
     </header>
     <section>
       <div class="container_12">
-        
+        <div class="grid_6 box">
+          <span class="icon">&#xf095;</span>
+          <h1>Telefonický kontakt</h1>
+          <table>
+            <tr>
+              <td>Dispatching (non-stop):&nbsp;&nbsp;&nbsp;<br>Freight Forwarding:</td>
+              <td><b>+421&nbsp;904&nbsp;162&nbsp;512</b></td>
+            </tr>
+            <tr>
+              <td><br>Managing Clerk:<br>Ľubor Ruttkay</td>
+              <td><br><b>+421&nbsp;901&nbsp;910&nbsp;512</b></td>
+            </tr>
+            <tr>
+            <td><br>Executive Manager:<br>Marcel Šubík</td>
+              <td><br><b>+421&nbsp;904&nbsp;412&nbsp;512</b></td>
+            </tr>
+          </table>
+        </div>
+        <div class="grid_6 box">
+          <span class="icon">&#xf0e0;</span>
+          <h1>Address</h1>
+          <p>
+            exT s.r.o.<br>
+            Rosinská 8541/30A<br>
+            010 08 Žilina
+          </p>
+          <table>
+            <tr>
+              <td>Email Address:</td>
+              <td><b><a href="mailto:mail@extsro.eu" style="text-decoration:none;color:black;">mail@extsro.eu</a></b></td>
+            </tr>
+            <tr>
+              <td style="padding-top:15px;">Managing Clerk:</td>
+              <td style="padding-top:15px;"><b><a href="mailto:l.ruttkay@extsro.eu" style="text-decoration:none;color:black;">l.ruttkay@extsro.eu</a></b></td>
+            </tr>
+            <tr>
+              <td>Executive Manager:</td>
+              <td><b><a href="mailto:m.subik@extsro.eu" style="text-decoration:none;color:black;">m.subik@extsro.eu</a></b></td>
+            </tr>
+            <tr>
+              <td valign="top"><br>Economic Department:&nbsp;&nbsp;&nbsp;</td>
+              <td>
+                <div><br><b><a href="mailto:m.kobolkova@extsro.eu" style="text-decoration:none;color:black;">m.kobolkova@extsro.eu</a></b><br>Finance and Invoicing</div>
+                <div style="margin-top:3px;"><b><a href="mailto:s.antosova@extsro.eu" style="text-decoration:none;color:black;">s.antosova@extsro.eu</a></b><br>Human Resources<br></div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="clear"> </div>
+        <div class="grid_7 box">
+          <span class="icon">&#xf075;</span>
+          <h1>Contact Form</h1>
+          <form id="form">
+            <label>Your Name:</label><span class="inline-icon info" title="Choose your prefered salutation to be used in further communication.">&#xf05a;</span><input type="text" name="name" value="" placeholder="John Doe"><br>
+            <label>Your Email / Tel. No.:</label><span class="inline-icon info" title="Your contact. We will contact you ASAP.">&#xf05a;</span><input type="text" name="email" value="" placeholder="john.doe@hotmail.com"><br>
+            <label>Question:</label><br>
+            <textarea name="content" rows="10" placeholder="Hi, I want to ask..."></textarea><br>
+            <button type="submit" name="submit" value="submit">Send</button>
+          </form>
+        </div>
+        <div class="grid_5 box">
+          <iframe width="320" height="240" frameborder="0" style="border:1px solid #111;margin:80px 0 0 40px;" src="https://www.google.com/maps/embed/v1/place?key= AIzaSyCaQ54QgSU6nnsfzaSsKwQOZ79qPpdJWY4&q=Rosinska+8541/30,Zilina" allowfullscreen></iframe>
+        </div>
+        <div class="clear"> </div>
         <footer class="grid_12">
           &copy;&nbsp;<script>document.write(new Date().getFullYear())</script>&nbsp;exT&nbsp;spol.&nbsp;s&nbsp;r.&nbsp;o.
         </footer>
